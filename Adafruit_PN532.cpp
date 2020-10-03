@@ -19,6 +19,8 @@
 
     @section  HISTORY
 
+    v2.3 - Changed packet buffer to 255
+
     v2.2 - Added support for extended frames
            Added startPassiveTargetIDDetection() to start card detection and
            readDetectedPassiveTargetID() to read it, useful when using the 
@@ -76,7 +78,7 @@ byte pn532response_firmwarevers[] = {0x00, 0x00, 0xFF, 0x06, 0xFA, 0xD5};
 #define PN532DEBUGPRINT Serial
 //#define PN532DEBUGPRINT SerialUSB
 
-#define PN532_PACKBUFFSIZ 64
+#define PN532_PACKBUFFSIZ 255
 byte pn532_packetbuffer[PN532_PACKBUFFSIZ];
 
 #ifndef _BV
