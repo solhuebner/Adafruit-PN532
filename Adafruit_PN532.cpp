@@ -18,14 +18,7 @@
           products from Adafruit!
 
     @section  HISTORY
-
-    v2.3 - Changed packet buffer to 255
-
-    v2.2 - Added support for extended frames
-           Added startPassiveTargetIDDetection() to start card detection and
-           readDetectedPassiveTargetID() to read it, useful when using the 
-           IRQ pin.
-
+    
     v2.1 - Added NTAG2xx helper functions
 
     v2.0 - Refactored to add I2C support from Adafruit_NFCShield_I2C library.
@@ -78,6 +71,12 @@ byte pn532response_firmwarevers[] = {0x00, 0x00, 0xFF, 0x06, 0xFA, 0xD5};
 #define PN532DEBUGPRINT Serial
 //#define PN532DEBUGPRINT SerialUSB
 
+#ifdef ESP32
+#define SPI_FREQUENCY 100000
+#else
+#define SPI_FREQUENCY 1000000
+#end
+
 #define PN532_PACKBUFFSIZ 255
 byte pn532_packetbuffer[PN532_PACKBUFFSIZ];
 
@@ -125,7 +124,7 @@ static inline uint8_t i2c_recv(void) {
 /**************************************************************************/
 Adafruit_PN532::Adafruit_PN532(uint8_t clk, uint8_t miso, uint8_t mosi,
                                uint8_t ss) {
-  spi_dev = new Adafruit_SPIDevice(ss, clk, miso, mosi, 1000000,
+  spi_dev = new Adafruit_SPIDevice(ss, clk, miso, mosi, SPI_FREQUENCY,
                                    SPI_BITORDER_LSBFIRST, SPI_MODE0);
 }
 
@@ -152,7 +151,7 @@ Adafruit_PN532::Adafruit_PN532(uint8_t irq, uint8_t reset)
 /**************************************************************************/
 Adafruit_PN532::Adafruit_PN532(uint8_t ss) {
   spi_dev =
-      new Adafruit_SPIDevice(ss, 1000000, SPI_BITORDER_LSBFIRST, SPI_MODE0);
+      new Adafruit_SPIDevice(ss, SPI_FREQUENCY, SPI_BITORDER_LSBFIRST, SPI_MODE0);
 }
 
 /**************************************************************************/
