@@ -1624,7 +1624,7 @@ void Adafruit_PN532::readdata(uint8_t *buff, uint16_t n) {
 #endif
   } else {
     // I2C write.
-    uint16_t timer = 0;
+    // uint16_t timer = 0;
 
     delay(2);
 
