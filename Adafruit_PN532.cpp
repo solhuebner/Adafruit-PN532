@@ -1750,6 +1750,17 @@ uint8_t Adafruit_PN532::setDataTarget(uint8_t *cmd, uint8_t cmdlen) {
 
 /**************************************************************************/
 /*!
+    @brief  Sends an ACK to the PN532 causing it to abort the current operation and wait for a new command
+*/
+/**************************************************************************/
+bool Adafruit_PN532::sendAck() {
+  uint8_t cmd = PN532_SPI_DATAWRITE;
+  spi_dev->write(pn532ack, 6, &cmd, 1);
+  return true;
+}
+
+/**************************************************************************/
+/*!
     @brief  Writes a command to the PN532, automatically inserting the
             preamble and required frame details (checksum, len, etc.)
 
