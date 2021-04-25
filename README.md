@@ -1,6 +1,6 @@
 This is a fork of the awesome Adafruit PN532 library with plenty PRs applied as I needed some of the extra functionality :)
 
-In case of issues try to execute nfc.sendAck() once after nfc.begin() and right before reading data with nfc.ntag2xx_ReadPage(...);
+In case of issues try to execute nfc.sendAck(); once after nfc.begin(); and right before reading data with nfc.ntag2xx_ReadPage(...);
 https://github.com/adafruit/Adafruit-PN532/issues/85
 
 ---------------------------------------------------------------------------------------------------------------------------
